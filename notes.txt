@@ -14,3 +14,12 @@ No Priority
 ==========================================================================================
     Documentation
 ==========================================================================================
+
+	UIs
+Landing
+Create Game
+Join Game Lobby
+Create Team Form
+Pick Play
+Play View
+Scoreboard

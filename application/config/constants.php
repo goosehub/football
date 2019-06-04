@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// Team
+define('MAX_TEAM_POINTS', 50);
+
 // User Auth
 define('PASSWORD_OVERRIDE', false); // Dev and emergency use only
 define('PASSWORD_OPTIONAL', false); // Useful for /r/webgames which requires no required password logins

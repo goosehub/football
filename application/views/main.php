@@ -10,69 +10,58 @@
 
     <hr>
 
-    <!-- Login Block -->
-    <?php if (!$user) { ?>
-    <div class="row">
-        <div id="login_block" class="col-md-6">
-            <strong>Login</strong>
-            <!-- Validation Errors -->
-            <?php if ($failed_form === 'login') { echo $validation_errors; } ?>
-            <!-- Form -->
-            <?php echo form_open('user/login'); ?>
-              <div class="form-group">
-                <label for="input_username">Username</label>
-                <input type="username" class="form-control" id="login_input_username" name="username" placeholder="Username">
-              </div>
-              <div class="form-group">
-                <label for="input_password">Password</label>
-                <input type="password" class="form-control" id="login_input_password" name="password" placeholder="Password">
-              </div>
-              <button type="submit" class="btn btn-action form-control">Login</button>
-            </form>
+    <h2>Create Team</h2>
+
+    <form action="create_team" method="post">
+      <label>Team Name</label>
+      <input class="input" id="teamNameInputId" type="text" name="team_name"/>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label>OLine</label>
+          <input class="input" id="olineInputId" type="range" value="0" min="0" max="10" name="oline" oninput="olineOutputId.value = olineInputId.value"/>
+          <output name="olineOutputName" id="olineOutputId">0</output>
+          <br>
+          <label>QB</label>
+          <input class="input" id="qbInputId" type="range" value="0" min="0" max="10" name="qb" oninput="qbOutputId.value = qbInputId.value"/>
+          <output name="qbOutputName" id="qbOutputId">0</output>
+          <br>
+          <label>RB</label>
+          <input class="input" id="rbInputId" type="range" value="0" min="0" max="10" name="rb" oninput="rbOutputId.value = rbInputId.value"/>
+          <output name="rbOutputName" id="rbOutputId">0</output>
+          <br>
+          <label>WRs</label>
+          <input class="input" id="wrInputId" type="range" value="0" min="0" max="10" name="wr" oninput="wrOutputId.value = wrInputId.value"/>
+          <output name="wrOutputName" id="wrOutputId">0</output>
+          <br>
+          <label>TE</label>
+          <input class="input" id="teInputId" type="range" value="0" min="0" max="10" name="te" oninput="teOutputId.value = teInputId.value"/>
+          <output name="teOutputName" id="teOutputId">0</output>
+          <br>
         </div>
-
-        <!-- Join Block -->
-        <div id="register_block" class="col-md-6">
-            <strong>Start Playing</strong>
-            <!-- Validation Errors -->
-            <?php if ($failed_form === 'register') { echo $validation_errors; } ?>
-            <!-- Form -->
-            <?php echo form_open('user/register'); ?>
-              <div class="form-group">
-              <input type="hidden" name="ab_test" value="<?php echo $ab_test; ?>"/>
-              <input type="hidden" name="bee_movie" value=""/>
-                <label for="input_username">Username</label>
-                <input type="username" class="form-control" id="register_input_username" name="username" placeholder="Username">
-              </div>
-              <!-- Only use this line when optional password is enabled -->
-              <!-- <p class="text-center">Password only needed to save progress</p> -->
-              <div class="row">
-                  <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="input_password">
-                            Password
-                            <small>(Optional)</small>
-                        </label>
-                        <input type="password" class="form-control" id="register_input_password" name="password" placeholder="Password">
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="input_confirm">
-                            Confirm
-                        </label>
-                        <input type="password" class="form-control" id="register_input_confirm" name="confirm" placeholder="Confirm">
-                      </div>
-                  </div>
-              </div>
-              <button type="submit" class="btn btn-action form-control">Start Playing</button>
-            </form>
+        <div class="col-md-6">
+          <label>DLine</label>
+          <input class="input" id="dlineInputId" type="range" value="0" min="0" max="10" name="dline" oninput="dlineOutputId.value = dlineInputId.value"/>
+          <output name="dlineOutputName" id="dlineOutputId">0</output>
+          <br>
+          <label>LBs</label>
+          <input class="input" id="lbInputId" type="range" value="0" min="0" max="10" name="lb" oninput="lbOutputId.value = lbInputId.value"/>
+          <output name="lbOutputName" id="lbOutputId">0</output>
+          <br>
+          <label>DBs</label>
+          <input class="input" id="dbInputId" type="range" value="0" min="0" max="10" name="db" oninput="dbOutputId.value = dbInputId.value"/>
+          <output name="dbOutputName" id="dbOutputId">0</output>
+          <br>
+          <label>Kicker</label>
+          <input class="input" id="kickerInputId" type="range" value="0" min="0" max="10" name="kicker" oninput="kickerOutputId.value = kickerInputId.value"/>
+          <output name="kickerOutputName" id="kickerOutputId">0</output>
+          <br>
+          <label>SpecialTeams</label>
+          <input class="input" id="specialInputId" type="range" value="0" min="0" max="10" name="special" oninput="specialOutputId.value = specialInputId.value"/>
+          <output name="specialOutputName" id="specialOutputId">0</output>
+          <br>
         </div>
-    </div>
-    <?php } ?>
-
-    <?php if ($user) { ?>
-    <a href="<?=base_url()?>user/logout" class="btn btn-danger">Logout</a>
-    <?php } ?>
-
+      </div>
+      <button>Join Game</button>
+    </form>
 </div>

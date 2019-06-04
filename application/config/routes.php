@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'main';
 
 // View for testing htaccess URL rewrite
+$route['create_team'] = 'team/create';
 $route['foobar'] = 'main';
 
 // Cron
