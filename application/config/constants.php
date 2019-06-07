@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 // Team
-define('MAX_TEAM_POINTS', 50);
+define('MAX_TEAM_RATING_POINTS', 50);
 
 // User Auth
 define('PASSWORD_OVERRIDE', false); // Dev and emergency use only

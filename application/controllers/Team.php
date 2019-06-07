@@ -11,6 +11,7 @@ class Team extends CI_Controller {
         $this->load->model('main_model', '', TRUE);
         $this->load->model('user_model', '', TRUE);
         $this->load->model('team_model', '', TRUE);
+        $this->load->model('game_model', '', TRUE);
 
         $this->main_model->record_request();
     }
@@ -31,13 +32,29 @@ class Team extends CI_Controller {
         $kicker = $this->input->post('kicker');
         $special = $this->input->post('special');
 
+        // Enforce maximum rating points
         $team_point_sum = $oline + $qb + $rb + $wr + $te + $dline + $lb + $db + $kicker + $special;
-
-        if ($team_point_sum > MAX_TEAM_POINTS) {
-            echo 'Too many points used. Max is ' . MAX_TEAM_POINTS;
+        if ($team_point_sum > MAX_TEAM_RATING_POINTS) {
+            echo 'Too many points used. Max is ' . MAX_TEAM_RATING_POINTS;
             return false;
         }
 
-        $create_team = $this->team_model->create_team($team_name, $user_key, $image, $oline, $qb, $rb, $wr, $te, $dline, $lb, $db, $kicker, $special);
+        // Create team
+        $team_id = $this->team_model->create_team($team_name, $user_key, $image, $oline, $qb, $rb, $wr, $te, $dline, $lb, $db, $kicker, $special);
+
+        // Search for open game
+        $open_game = $this->game_model->get_unstarted_game();
+
+        // Use open game, or start new one
+        if ($open_game) {
+            $game_id = $open_game['id'];
+            $join_game = $this->game_model->join_game($game_id, $team_id);
+        }
+        else {
+            $game_id = $this->game_model->create_game($team_id);
+        }
+
+        // Redirect to game
+        redirect(base_url() . 'game/' . $game_id, 'refresh');
     }
 }

@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `game` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `home_team_key` int(10) unsigned NOT NULL,
-  `away_team_key` int(10) unsigned NOT NULL,
+  `home_team_key` int(10) unsigned NULL,
+  `away_team_key` int(10) unsigned NULL,
   `home_score` int(10) unsigned NOT NULL,
   `away_score` int(10) unsigned NOT NULL,
   `home_timeouts` int(10) unsigned NOT NULL,
