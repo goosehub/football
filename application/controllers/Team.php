@@ -13,6 +13,10 @@ class Team extends CI_Controller {
         $this->load->model('team_model', '', TRUE);
         $this->load->model('game_model', '', TRUE);
 
+        if (!$this->session->has_userdata('cookie_id')) {
+            $this->session->set_userdata('cookie_id', uniqid());
+        }
+
         $this->main_model->record_request();
     }
 
@@ -40,7 +44,7 @@ class Team extends CI_Controller {
         }
 
         // Create team
-        $team_id = $this->team_model->create_team($team_name, $user_key, $image, $oline, $qb, $rb, $wr, $te, $dline, $lb, $db, $kicker, $special);
+        $team_id = $this->team_model->create_team($this->session->cookie_id, $team_name, $user_key, $image, $oline, $qb, $rb, $wr, $te, $dline, $lb, $db, $kicker, $special);
 
         // Search for open game
         $open_game = $this->game_model->get_unstarted_game();

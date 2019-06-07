@@ -13,7 +13,7 @@
       <div class="form-group">
         <label for="teamNameInputId">Team Name</label>
         <br>
-        <input class="input rating_input form-control" id="teamNameInputId" type="text" name="team_name"/>
+        <input class="input form-control" id="teamNameInputId" type="text" name="team_name"/>
       </div>
 
       <div class="row">

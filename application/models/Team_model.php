@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 Class team_model extends CI_Model
 {
-    function create_team($team_name, $user_key, $image, $oline, $qb, $rb, $wr, $te, $dline, $lb, $db, $kicker, $special)
+    function create_team($cookie_id, $team_name, $user_key, $image, $oline, $qb, $rb, $wr, $te, $dline, $lb, $db, $kicker, $special)
     {
         $data = array(
             'team_name' => $team_name,
@@ -21,9 +21,20 @@ Class team_model extends CI_Model
             'db_rating' => $db,
             'kicker_rating' => $kicker,
             'special_rating' => $special,
+            'cookie_id' => $cookie_id,
         );
         $this->db->insert('team', $data);
         return $this->db->insert_id();
+    }
+
+    function get_team($id)
+    {
+        $this->db->select('*');
+        $this->db->from('team');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return isset($result[0]) ? $result[0] : false;
     }
 }
 ?>

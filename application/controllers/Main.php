@@ -10,6 +10,10 @@ class Main extends CI_Controller {
         // Uncomment models after database created
         $this->load->model('main_model', '', TRUE);
         $this->load->model('user_model', '', TRUE);
+        
+        if (!$this->session->has_userdata('cookie_id')) {
+            $this->session->set_userdata('cookie_id', uniqid());
+        }
 
         $this->main_model->record_request();
     }

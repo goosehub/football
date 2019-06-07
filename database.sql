@@ -244,6 +244,7 @@ CREATE TABLE IF NOT EXISTS `team` (
   `db_rating` int(10) unsigned DEFAULT NULL,
   `kicker_rating` int(10) unsigned DEFAULT NULL,
   `special_rating` int(10) unsigned DEFAULT NULL,
+  `cookie_id` varchar(100) DEFAULT NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` timestamp NULL DEFAULT NULL,
