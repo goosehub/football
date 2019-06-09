@@ -22,7 +22,8 @@ class Game extends CI_Controller {
 
     public function index($game_id)
     {
-        $data['game'] = $this->game_model->get_game($game_id, $this->session->cookie_id);
+        $data['game'] = $this->game_model->get_game($game_id);
+        $data['last_play'] = $this->game_model->get_game_last_play($game_id, 0);
         $data['home_team'] = $this->team_model->get_team($data['game']['home_team_key']);
         $data['away_team'] = $this->team_model->get_team($data['game']['away_team_key']);
         if ($data['home_team']['cookie_id'] === $this->session->cookie_id) {
@@ -42,5 +43,12 @@ class Game extends CI_Controller {
         $this->load->view('game', $data);
         $this->load->view('game_script', $data);
         $this->load->view('templates/footer', $data);
+    }
+
+    public function get_game_info($game_id, $last_play_id)
+    {
+        $data['game'] = $this->game_model->get_game($game_id);
+        $data['last_play'] = $this->game_model->get_game_last_play($game_id, $last_play_id);
+        echo json_encode($data);
     }
 }

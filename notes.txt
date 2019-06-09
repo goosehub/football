@@ -3,6 +3,9 @@
 ==========================================================================================
 
 High Priority
+	Enter Play
+	Get Last Play
+	Detect player leaving before other player can join
 
 Moderate Priority
     
