@@ -26,6 +26,7 @@ class Game extends CI_Controller {
         $data['last_play'] = $this->game_model->get_game_last_play($game_id, 0);
         $data['home_team'] = $this->team_model->get_team($data['game']['home_team_key']);
         $data['away_team'] = $this->team_model->get_team($data['game']['away_team_key']);
+        $data['offense_plays'] = $this->game_model->get_offense_plays();
         if ($data['home_team']['cookie_id'] === $this->session->cookie_id) {
             $data['is_home_team'] = true;
         }

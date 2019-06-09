@@ -68,5 +68,13 @@ Class game_model extends CI_Model
         $result = $query->result_array();
         return isset($result[0]) ? $result[0] : false;
     }
+
+    function get_offense_plays()
+    {
+        $this->db->select('*');
+        $this->db->from('offense_play');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
 ?>
