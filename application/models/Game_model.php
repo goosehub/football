@@ -19,7 +19,7 @@ Class game_model extends CI_Model
             'down' => 0,
             'ball_on_yard_line' => 0,
             'yards_to_goal' => 0,
-            'is_hometeam_ball' => 0,
+            'is_hometeam_ball' => 1,
             'is_goal_to_go' => 0,
             'is_kickoff' => 1,
             'is_extra_point' => 0,
