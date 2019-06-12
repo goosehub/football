@@ -1,6 +1,7 @@
 <script>
 let base_url = '<?php echo base_url(); ?>';
 let is_home_team = <?php echo $is_home_team ? 'true' : 'false'; ?>;
+let game_id = <?php echo $game['id']; ?>;
 let last_play_id = 0;
 let game_started = 0;
 let is_run_stuff = 0;
@@ -14,9 +15,11 @@ setInterval(function(){
   get_game_info();
 }, get_game_info_interval);
 
+detect_offense_play_select();
+
 // Get Last Play
 function get_game_info() {
-  ajax_get('game/get_game_info/<?php echo $game['id']; ?>/' + last_play_id, function(data){
+  ajax_get('game/get_game_info/' + game_id + '/' + last_play_id, function(data){
     // console.log('get_game_info');
     // console.log(data);
     if (data.game.away_team_key) {
@@ -36,12 +39,10 @@ function show_select_play(game) {
   // Kickoff
   if (game.is_kickoff) {
     if (is_my_ball(game.is_hometeam_ball)) {
-      console.log('marco');
       $('#offense_plays_parent').show();
       $('.play_button[kickoff="1"]').show();
     }
     else {
-      console.log('polo');
       $('#waiting_for_kicking_team').show();
     }
   }
@@ -55,6 +56,16 @@ function show_select_play(game) {
       $('.defense_play_button').show();
     }
   }
+}
+
+function detect_offense_play_select() {
+  $('.offense_play_button').click(function(){
+    let selected_play_id = $(this).attr('play_id');
+    ajax_post('game/offense_play_select/' + game_id + '/' + selected_play_id, function(data){
+      console.log('marco');
+      console.log(data);
+    });
+  });
 }
 
 function is_my_ball(is_hometeam_ball) {

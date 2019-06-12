@@ -35,27 +35,37 @@
       <!-- Defense Plays -->
       <div id="defense_plays_parent" class="row text-center">
         <div class="col-md-5">
-          <div id="stuff_defense_button" class="play_button defense_play_button btn btn-default form-control">Stuff the Run</div> 
+          <div id="stuff_defense_button" defense="stuff_defense" class="play_button defense_play_button btn btn-default form-control">
+            Stuff the Run
+          </div> 
         </div>
         <div class="col-md-2">
           or 
         </div>
         <div class="col-md-5">
-          <div id="pass_defense_button" class="play_button defense_play_button btn btn-default form-control">Play The Pass</div>
+          <div id="pass_defense_button" defense="pass_defense" class="play_button defense_play_button btn btn-default form-control">
+            Play The Pass
+          </div>
           <br><br>
         </div>
         <div class="col-md-5">
-          <div id="man_defense_button" class="play_button defense_play_button btn btn-default form-control">Man</div> 
+          <div id="man_defense_button" defense="man_defense" class="play_button defense_play_button btn btn-default form-control">
+            Man</div>
+             
         </div>
         <div class="col-md-2">
           or 
         </div>
         <div class="col-md-5">
-          <div id="zone_defense_button" class="play_button defense_play_button btn btn-default form-control">Zone</div>
+          <div id="zone_defense_button" defense="zone_defense" class="play_button defense_play_button btn btn-default form-control">
+            Zone</div>
+            
           <br><br>
         </div>
         <div class="col-md-5">
-          <div id="blitz_defense_button" class="play_button defense_play_button btn btn-default form-control">Blitz</div> 
+          <div id="blitz_defense_button" defense="blitz_defense" class="play_button defense_play_button btn btn-default form-control">
+            Blitz</div>
+             
         </div>
         <div class="col-md-2">
           or 

@@ -12,6 +12,7 @@ class Game extends CI_Controller {
         $this->load->model('user_model', '', TRUE);
         $this->load->model('team_model', '', TRUE);
         $this->load->model('game_model', '', TRUE);
+        $this->load->model('play_model', '', TRUE);
 
         if (!$this->session->has_userdata('cookie_id')) {
             $this->session->set_userdata('cookie_id', uniqid());
@@ -51,5 +52,25 @@ class Game extends CI_Controller {
         $data['game'] = $this->game_model->get_game($game_id);
         $data['last_play'] = $this->game_model->get_game_last_play($game_id, $last_play_id);
         echo json_encode($data);
+    }
+
+    public function offense_play_select($game_id, $play_id)
+    {
+        // Search for pending game history
+        $game = $this->game_model->get_game($game_id);
+        $pending_history = $this->play_model->get_pending_game_history_for_offense($game_id);
+
+        // Use open game, or start new one
+        $ready_for_play = false;
+        if ($pending_history) {
+            $this->play_model->update_game_history_for_offense($game_id, $game, $pending_history['id']);
+            $ready_for_play = true;
+        }
+        else {
+            $this->play_model->create_game_history_for_offense($game_id, $game);
+        }
+
+        // Return if ready
+        return $ready_for_play;
     }
 }
