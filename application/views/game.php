@@ -78,9 +78,28 @@
 
       <!-- Debug -->
       <p>
-        <hr>
-        <hr>
-        <hr>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <?php // var_dump($offense_plays); ?>
         <?php var_dump($game); ?>
         <?php var_dump($last_play); ?>

@@ -63,14 +63,34 @@ class Game extends CI_Controller {
         // Use open game, or start new one
         $ready_for_play = false;
         if ($pending_history) {
-            $this->play_model->update_game_history_for_offense($game_id, $game, $pending_history['id']);
+            $this->play_model->update_game_history_for_offense($game, $pending_history['id'], $play_id);
             $ready_for_play = true;
         }
         else {
-            $this->play_model->create_game_history_for_offense($game_id, $game);
+            $this->play_model->create_game_history_for_offense($game, $play_id);
         }
 
         // Return if ready
-        return $ready_for_play;
+        echo api_response($ready_for_play);
+    }
+
+    public function defense_play_select($game_id, $is_run_stuff, $is_man, $is_blitz)
+    {
+        // Search for pending game history
+        $game = $this->game_model->get_game($game_id);
+        $pending_history = $this->play_model->get_pending_game_history_for_offense($game_id);
+
+        // Use open game, or start new one
+        $ready_for_play = false;
+        if ($pending_history) {
+            $this->play_model->update_game_history_for_defense($game, $pending_history['id'], $is_run_stuff, $is_man, $is_blitz);
+            $ready_for_play = true;
+        }
+        else {
+            $this->play_model->create_game_history_for_defense($game, $is_run_stuff, $is_man, $is_blitz);
+        }
+
+        // Return if ready
+        echo api_response($ready_for_play);
     }
 }
