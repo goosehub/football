@@ -27,6 +27,13 @@ Class play_model extends CI_Model
         return isset($result[0]) ? $result[0] : false;
     }
 
+    function apply_outcome_to_game_history($play_id, $outcome_key)
+    {
+        $data['outcome_key'] = $outcome_key;
+        $this->db->where('id', $play_id);
+        $this->db->update('game_history', $data);
+    }
+
     function create_game_history_for_offense($game, $play_key)
     {
         $data = $this->game_history_template($game);
@@ -38,7 +45,6 @@ Class play_model extends CI_Model
 
     function update_game_history_for_offense($game, $id, $play_key)
     {
-        $data = $this->game_history_template($game);
         $data['offense_play_key'] = $play_key;
         $this->db->where('id', $id);
         $this->db->update('game_history', $data);
@@ -57,12 +63,20 @@ Class play_model extends CI_Model
 
     function update_game_history_for_defense($game, $id, $is_run_stuff, $is_man, $is_blitz)
     {
-        $data = $this->game_history_template($game);
         $data['is_run_stuff'] = $is_run_stuff;
         $data['is_man'] = $is_man;
         $data['is_blitz'] = $is_blitz;
         $this->db->where('id', $id);
         $this->db->update('game_history', $data);
+    }
+
+    function get_outcome_by_play_key($play_key)
+    {
+        $this->db->select('*');
+        $this->db->from('outcome');
+        $this->db->where('offense_play_key', $play_key);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     function game_history_template($game)

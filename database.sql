@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `outcome` (
   `animation_a` varchar(100) NOT NULL,
   `animation_b` varchar(100) NOT NULL,
   `game_audio` varchar(100) NOT NULL,
-  `in_complete` tinyint(1) NOT NULL,
+  `is_complete` tinyint(1) NOT NULL,
   `is_incomplete` tinyint(1) NOT NULL,
   `is_interception` tinyint(1) NOT NULL,
   `is_fumble` tinyint(1) NOT NULL,

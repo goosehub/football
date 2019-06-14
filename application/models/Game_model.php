@@ -57,11 +57,23 @@ Class game_model extends CI_Model
         $this->db->update('game', $data);
     }
 
-    function get_game_last_play($game_id, $last_play_id)
+    function get_game_last_play($game_id)
     {
         $this->db->select('*');
         $this->db->from('game_history');
-        $this->db->where('id', '>', $last_play_id);
+        $this->db->where('outcome_key IS NOT NULL', null, false);
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return isset($result[0]) ? $result[0] : false;
+    }
+
+    function get_game_current_play($game_id)
+    {
+        $this->db->select('*');
+        $this->db->from('game_history');
+        $this->db->where('outcome_key', null);
         $this->db->order_by('id', 'DESC');
         $this->db->limit(1);
         $query = $this->db->get();

@@ -2,7 +2,6 @@
 let base_url = '<?php echo base_url(); ?>';
 let is_home_team = <?php echo $is_home_team ? 'true' : 'false'; ?>;
 let game_id = <?php echo $game['id']; ?>;
-let last_play_id = 0;
 let game_started = 0;
 let is_run_stuff = 0;
 let is_man = 0;
@@ -23,7 +22,7 @@ $(document).ready(function(){
 
 // Get Last Play
 function get_game_info() {
-  ajax_get('game/get_game_info/' + game_id + '/' + last_play_id, function(data){
+  ajax_get('game/get_game_info/' + game_id, function(data){
     // console.log('get_game_info');
     // console.log(data);
     if (!data.game.away_team_key) {

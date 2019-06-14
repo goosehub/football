@@ -47,11 +47,27 @@ class Game extends CI_Controller {
         $this->load->view('templates/footer', $data);
     }
 
-    public function get_game_info($game_id, $last_play_id)
+    public function get_game_info($game_id)
     {
         $data['game'] = $this->game_model->get_game($game_id);
-        $data['last_play'] = $this->game_model->get_game_last_play($game_id, $last_play_id);
+        $data['last_play'] = $this->game_model->get_game_last_play($game_id);
+        $data['current_play'] = $this->game_model->get_game_current_play($game_id);
+        if ($data['current_play']['offense_play_key'] && !is_null($data['current_play']['is_run_stuff'])) {
+            $data['outcome'] = $this->the_football_gods($data['current_play']);
+            $this->play_model->apply_outcome_to_game_history($data['current_play']['id'], $data['outcome']['id']);
+        }
         echo json_encode($data);
+    }
+
+    public function the_football_gods($current_play)
+    {
+        $possible_outcomes = $this->play_model->get_outcome_by_play_key($current_play['offense_play_key']);
+        if (!$possible_outcomes) {
+            echo 'Football Gods In Progress';
+            die();
+        }
+        // For now, leave it random
+        return $possible_outcomes[array_rand($possible_outcomes)];
     }
 
     public function offense_play_select($game_id, $play_id)
@@ -61,17 +77,17 @@ class Game extends CI_Controller {
         $pending_history = $this->play_model->get_pending_game_history_for_offense($game_id);
 
         // Use open game, or start new one
-        $ready_for_play = false;
+        $data['ready_for_play'] = false;
         if ($pending_history) {
             $this->play_model->update_game_history_for_offense($game, $pending_history['id'], $play_id);
-            $ready_for_play = true;
+            $data['ready_for_play'] = true;
         }
         else {
             $this->play_model->create_game_history_for_offense($game, $play_id);
         }
 
         // Return if ready
-        echo api_response($ready_for_play);
+        echo api_response($data['ready_for_play']);
     }
 
     public function defense_play_select($game_id, $is_run_stuff, $is_man, $is_blitz)
