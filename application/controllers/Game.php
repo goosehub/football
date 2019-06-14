@@ -42,6 +42,7 @@ class Game extends CI_Controller {
         // Load view
         $data['page_title'] = 'Game Time';
         $this->load->view('templates/header', $data);
+        $this->load->view('scoreboard', $data);
         $this->load->view('game', $data);
         $this->load->view('game_script', $data);
         $this->load->view('templates/footer', $data);
@@ -52,6 +53,7 @@ class Game extends CI_Controller {
         $data['game'] = $this->game_model->get_game($game_id);
         $data['last_play'] = $this->game_model->get_game_last_play($game_id);
         $data['current_play'] = $this->game_model->get_game_current_play($game_id);
+        $data['outcome'] = false;
         if ($data['current_play']['offense_play_key'] && !is_null($data['current_play']['is_run_stuff'])) {
             $data['outcome'] = $this->the_football_gods($data['current_play']);
             $this->play_model->apply_outcome_to_game_history($data['current_play']['id'], $data['outcome']['id']);

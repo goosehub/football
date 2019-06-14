@@ -18,6 +18,10 @@
         </span>
       </div>
 
+      <div id="outcome_parent">
+        <p id="outcome_text">
+        </p>
+      </div>
 
       <!-- Offense Plays -->
       <div id="offense_plays_parent" class="row">

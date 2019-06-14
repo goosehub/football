@@ -25,8 +25,9 @@ function get_game_info() {
   ajax_get('game/get_game_info/' + game_id, function(data){
     // console.log('get_game_info');
     // console.log(data);
+    reset_ui();
+    update_scoreboard(data.game);
     if (!data.game.away_team_key) {
-      reset_ui();
       $('#awaiting_opponent_to_join').show();
       return;
     }
@@ -34,9 +35,26 @@ function get_game_info() {
       show_select_play(data.game);
     }
     else {
-      // show_play(data.last_play);
+      show_play(data.outcome);
     }
   });
+}
+
+function update_scoreboard(game) {
+  $('#game_home_score').text(game.home_score);
+  $('#game_away_score').text(game.away_score);
+  $('#game_home_timeouts').text(game.home_timeouts);
+  $('#game_away_timeouts').text(game.away_timeouts);
+  $('#game_quarter').text(game.quarter);
+  $('#game_time').text(game.time);
+  $('#game_down').text(game.down);
+  $('#game_ball_on_yard_line').text(game.ball_on_yard_line);
+  $('#game_yards_to_first_down').text(game.yards_to_first_down);
+  $('#game_is_home_team_ball').text(game.is_home_team_ball);
+  $('#game_is_goal_to_go').text(game.is_goal_to_go);
+  $('#game_is_kickoff').text(game.is_kickoff);
+  $('#game_is_extra_point_attempt').text(game.is_extra_point_attempt);
+  $('#game_created').text(game.created);
 }
 
 function show_select_play(game) {
@@ -62,6 +80,11 @@ function show_select_play(game) {
       $('.defense_play_button').show();
     }
   }
+}
+
+function show_play(outcome) {
+  $('outcome_parent').show();
+  $('outcome_text').show(outcome.announcer_text);
 }
 
 function reset_ui() {
