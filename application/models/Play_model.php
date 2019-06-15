@@ -91,7 +91,7 @@ Class play_model extends CI_Model
             'time' => $game['time'],
             'ball_on_yard_line' => $game['ball_on_yard_line'],
             'down' => $game['down'],
-            'yards_to_goal' => $game['yards_to_goal'],
+            'yards_to_first_down' => $game['yards_to_first_down'],
             'is_goal_to_go' => $game['is_goal_to_go'],
             'is_home_team_ball' => $game['is_home_team_ball'],
             'is_kickoff' => $game['is_kickoff'],

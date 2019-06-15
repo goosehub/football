@@ -18,7 +18,7 @@ Class game_model extends CI_Model
             'time' => '5:00',
             'down' => 0,
             'ball_on_yard_line' => 0,
-            'yards_to_goal' => 0,
+            'yards_to_first_down' => 0,
             'is_home_team_ball' => 1,
             'is_goal_to_go' => 0,
             'is_kickoff' => 1,
@@ -62,6 +62,7 @@ Class game_model extends CI_Model
         $this->db->select('*');
         $this->db->from('game_history');
         $this->db->where('outcome_key IS NOT NULL', null, false);
+        $this->db->where('game_key', $game_id);
         $this->db->order_by('id', 'DESC');
         $this->db->limit(1);
         $query = $this->db->get();
