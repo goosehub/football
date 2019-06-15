@@ -49,9 +49,9 @@ function update_scoreboard(game) {
   $('#game_time').text(game.time);
   $('#game_down').text(game.down);
   $('#game_ball_on_yard_line').text(game.ball_on_yard_line);
-  $('#game_yards_to_first_down').text(game.yards_to_first_down);
-  $('#game_is_home_team_ball').text(game.is_home_team_ball);
-  $('#game_is_goal_to_go').text(game.is_goal_to_go);
+  $('#game_yards_to_first_down').text(parseInt(game.is_goal_to_go) ? 'Goal' : game.yards_to_first_down);
+  $('#game_is_home_team_ball').text(game.is_home_team_ball ? '*' : '');
+  $('#game_is_away_team_ball').text(!game.is_home_team_ball ? '*' : '');
   $('#game_is_kickoff').text(game.is_kickoff);
   $('#game_is_extra_point_attempt').text(game.is_extra_point_attempt);
   $('#game_created').text(game.created);
