@@ -57,6 +57,7 @@ class Game extends CI_Controller {
         if ($data['current_play']['offense_play_key'] && !is_null($data['current_play']['is_run_stuff'])) {
             $data['outcome'] = $this->the_football_gods($data['current_play']);
             $this->play_model->apply_outcome_to_game_history($data['current_play']['id'], $data['outcome']['id']);
+            $this->game_model->apply_outcome_to_game_state($data['game'], $data['outcome']);
         }
         echo json_encode($data);
     }
@@ -89,7 +90,7 @@ class Game extends CI_Controller {
         }
 
         // Return if ready
-        echo api_response($data['ready_for_play']);
+        echo api_response($data);
     }
 
     public function defense_play_select($game_id, $is_run_stuff, $is_man, $is_blitz)
